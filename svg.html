@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>testsvg</title>
+    <style type="text/css">
+        .status{
+            background: white;
+            clear: both;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .stroke-poly{
+            fill: #eee;
+            stroke: #ccc;
+            stroke-width: 1;
+        }
+
+        .full-poly{
+            fill: #18d411;
+            opacity: 0.8;
+        }
+
+    </style>
+</head>
+
+<body>
+<svg  height="480" width="600" viewBox="0 0 600 480" class="triangle-wrap">
+    <g id="radar">
+    </g>
+</svg>
+
+<button onclick="generateRandom()">transform</button>
+
+<script type="text/javascript">
+//角度求坐标
+function p2(rt,rr,rl){
+    var size = 300;
+    var x_fun = function(angle,r){
+        return size+Math.floor(r*Math.cos(angle*Math.PI/180)*100)/100;
+    }
+    var y_fun = function(angle,r){
+        return size+Math.floor(r*Math.sin(angle*Math.PI/180)*100)/100;
+    }
+    return {
+        t:x_fun(-90,rt)+' '+y_fun(-90,rt),
+        r:x_fun(30,rr)+' '+y_fun(30,rr),
+        l:x_fun(150,rl)+' '+y_fun(150,rl),
+    }
+    
+}
+
+function drawPolygon(points,classname){
+    var ns = 'http://www.w3.org/2000/svg',
+        polygon = document.createElementNS(ns, 'polygon'),
+        radar = document.getElementById('radar');
+
+    var points_str = points.t + ' ' + points.r + ' ' + points.l;            
+
+    polygon.setAttribute('points', points_str);
+    polygon.setAttribute('class', classname);
+    radar.appendChild(polygon);
+
+    return polygon;    
+}
+
+for(var i = 0;i<5;i++){
+    var _r = 300 - i*60;
+    var point = p2(_r,_r,_r);
+    drawPolygon(point,'stroke-poly');
+}
+drawPolygon(p2(300,300,300),'full-poly');
+</script>
+</body>
+</html>
