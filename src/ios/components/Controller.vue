@@ -1399,7 +1399,7 @@ export default {
     },
 
     wakeSimulateion:function(obj){
-        //直线距离
+        //直线距离this.roule
         this.line_distance      = this.roule.line_distance
         //路径点
         this.point_list         = this.roule.crude

@@ -3,14 +3,8 @@
  * 区分终端类型，区分地图类别
  */
 import VueRouter from 'vue-router'
-const pc_google = function(resolve) { require(['./pc/pc_google.vue'], resolve) }
-const pc_mapbox = function(resolve) { require(['./pc/pc_mapbox.vue'], resolve) }
-const mac_google = function(resolve) { require(['./mac/mac_google.vue'], resolve) }
-const mac_mapbox = function(resolve) { require(['./mac/mac_mapbox.vue'], resolve) }
 const ios_google = function(resolve) { require(['./ios/ios_google.vue'], resolve) }
 const ios_mapbox = function(resolve) { require(['./ios/ios_mapbox.vue'], resolve) }
-const android_google = function(resolve) { require(['./android/android_google.vue'], resolve) }
-const android_mapbox = function(resolve) { require(['./android/android_mapbox.vue'], resolve) }
 const update = function(resolve) { require(['./Update.vue'], resolve) }
 const timeEnd = function(resolve) { require(['./TimeEnd.vue'], resolve) }
 
@@ -21,22 +15,6 @@ const timeEnd = function(resolve) { require(['./TimeEnd.vue'], resolve) }
 const getDefaultRoule = function()
 {
     let route = window.osType + "_" + window.mapType;
-    // let route = '/ios_google';
-    if(window.osType == 'pc')
-    {
-        /*pc win版本检测版本号*/
-        try{
-            setMsgCallback('GetClientVersion',(data)=>{
-                data = eval('('+data+')')
-                if(data.version < 4368)
-                {
-                    route = 'update'
-                }
-            })
-            window.GetClientVersion()
-        }catch(e){
-        }
-    }
     if(window.TrialTime <= 0)
     {
         route = 'timeEnd'
@@ -47,36 +25,6 @@ const getDefaultRoule = function()
 
 let router = new VueRouter({
     routes: [
-        {
-            name: 'pc_google',
-            path: '/pc_google',
-            component: pc_google
-        },
-        {
-            name: 'pc_mapbox',
-            path: '/pc_mapbox',
-            component: pc_mapbox
-        },
-        {
-            name: 'mac_google',
-            path: '/mac_google',
-            component: mac_google
-        },
-        {
-            name: 'mac_mapbox',
-            path: '/mac_mapbox',
-            component: mac_mapbox
-        },
-        {
-            name: 'android_google',
-            path: '/android_google',
-            component: android_google
-        },
-        {
-            name: 'android_mapbox',
-            path: '/android_mapbox',
-            component: android_mapbox
-        },
         {
             name: 'ios_google',
             path: '/ios_google',

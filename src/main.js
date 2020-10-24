@@ -36,11 +36,6 @@ Vue.use(VueLazyload, {
   attempt: 1
 });
 
-
-if(window.osType == 'android'){
-  import('./android/lib/setExternal')
-}
-
 window.addEventListener( "load", function() { FastClick.attach( document.body );}, false );
 // FastClick.attach(document.body);
 //ios依赖css
